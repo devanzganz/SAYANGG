@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Untukmu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .message {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .emoji {
+            font-size: 80px;
+            animation: bounce 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 10s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="message" id="message">Sayangggg</div>
+        <div class="emoji" id="emoji">😢</div>
+    </div>
+
+    <script>
+        const messages = [
+            { text: "Sayangggg", emoji: "😢", duration: 5000 },
+            { text: "Jangan sedih sedih yaa", emoji: "😔", duration: 5000 },
+            { text: "Aku punya sesuatu untukmu", emoji: "🤔", duration: 5000 },
+            { text: "Ini untukmu", emoji: "💐", duration: 15000 }
+        ];
+
+        let currentIndex = 0;
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'heart';
+            const flowers = ['🌸', '🌺', '🌹', '🌷', '🌻', '💐'];
+            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + '%';
+            flower.style.fontSize = (Math.random() * 30 + 30) + 'px';
+            flower.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('hearts').appendChild(flower);
+            
+            setTimeout(() => {
+                flower.remove();
+            }, 7000);
+        }
+
+        function updateMessage() {
+            const messageEl = document.getElementById('message');
+            const emojiEl = document.getElementById('emoji');
+            
+            messageEl.style.animation = 'none';
+            emojiEl.style.animation = 'none';
+            
+            setTimeout(() => {
+                messageEl.textContent = messages[currentIndex].text;
+                emojiEl.textContent = messages[currentIndex].emoji;
+                
+                messageEl.style.animation = 'fadeIn 1s ease-in';
+                emojiEl.style.animation = 'bounce 1s ease-in';
+                
+                // Jika pesan bunga, buat banyak bunga berguguran
+                if (currentIndex === 3) {
+                    const flowerInterval = setInterval(createFlower, 100);
+                    setTimeout(() => clearInterval(flowerInterval), 15000);
+                }
+                
+                const duration = messages[currentIndex].duration;
+                currentIndex = (currentIndex + 1) % messages.length;
+                
+                setTimeout(updateMessage, duration);
+            }, 100);
+        }
+
+        // Mulai pesan pertama
+        updateMessage();
+
+        // Buat hati berterbangan
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 13000);
+        }
+
+        // Buat hati baru setiap 2 detik
+        setInterval(createHeart, 2000);
+        
+        // Buat beberapa hati di awal
+        for(let i = 0; i < 5; i++) {
+            setTimeout(createHeart, i * 400);
+        }
+    </script>
+</body>
+</html>
