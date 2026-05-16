@@ -1,191 +1,971 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan Untukmu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday My Destiny 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --rose: #c9536a;
+    --blush: #f4c6ce;
+    --cream: #fdf6f0;
+    --gold: #c9a96e;
+    --deep: #2b1a1f;
+    --soft: #7a5560;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-        .container {
-            text-align: center;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-        }
+  html { scroll-behavior: smooth; }
 
-        .message {
-            font-size: 32px;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 600;
-            animation: fadeIn 1s ease-in;
-        }
+  body {
+    background: var(--cream);
+    font-family: 'Lato', sans-serif;
+    color: var(--deep);
+    overflow-x: hidden;
+  }
 
-        .emoji {
-            font-size: 80px;
-            animation: bounce 1s ease-in;
-        }
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(160deg, #2b1a1f 0%, #5c2d3a 50%, #8b4a5c 100%);
+    overflow: hidden;
+    padding: 40px 20px;
+  }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .petals {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
+  .petal {
+    position: absolute;
+    width: 12px; height: 18px;
+    background: radial-gradient(ellipse at 40% 30%, #f4c6ce, #c9536a88);
+    border-radius: 50% 50% 50% 10%;
+    animation: fall linear infinite;
+    opacity: 0;
+  }
 
-        .hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: -1;
-        }
+  @keyframes fall {
+    0%   { transform: translateY(-60px) rotate(0deg); opacity:0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity:0; }
+  }
 
-        .heart {
-            position: absolute;
-            font-size: 30px;
-            animation: float 10s infinite;
-            opacity: 0.6;
-        }
+  .hero-tag {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: 6px;
+    font-size: 11px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    color: #fff;
+    text-align: center;
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-title span {
+    display: block;
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: #f4c6ce99;
+    margin-top: 18px;
+    text-align: center;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+    max-width: 500px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: lineGrow 1.5s ease-in-out infinite;
+  }
+
+  @keyframes lineGrow {
+    0%,100% { transform: scaleY(0.4); opacity: 0.4; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: 5px;
+    font-size: 10px;
+    color: var(--rose);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    text-align: center;
+    color: var(--deep);
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 auto 60px;
+    max-width: 300px;
+  }
+
+  .divider-line { flex:1; height:1px; background: var(--blush); }
+  .divider-gem {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── FLOWER SECTION ── */
+  #flowers { background: #fff; }
+
+  .flower-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @media(min-width: 600px) {
+    .flower-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .flower-card {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    position: relative;
+    background: var(--cream);
+  }
+
+  .flower-card:hover { transform: translateY(-6px); border-color: var(--blush); }
+
+  .flower-card.selected {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 4px #c9536a22;
+  }
+
+  .flower-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: var(--blush);
+  }
+
+  /* placeholder saat gambar belum ada */
+  .flower-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fce8ec, #f4c6ce);
+    gap: 8px;
+  }
+
+  .flower-placeholder .icon { font-size: 2.5rem; }
+  .flower-placeholder .ph-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--soft);
+    text-transform: uppercase;
+  }
+
+  .flower-name {
+    padding: 10px 8px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--soft);
+  }
+
+  .flower-check {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: #fff;
+    font-size: 12px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flower-card.selected .flower-check { display: flex; }
+
+  /* ── TRANSITION BANNER ── */
+  #transition-banner {
+    background: linear-gradient(135deg, #2b1a1f, #5c2d3a);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #transition-banner::before {
+    content:'';
+    position:absolute; inset:0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9536a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  #transition-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: #fff;
+    position: relative;
+  }
+
+  #transition-banner p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--blush);
+    font-style: italic;
+    margin-top: 12px;
+    position: relative;
+  }
+
+  /* ── ACTIVITY SECTION ── */
+  #activities { background: var(--cream); }
+
+  .activity-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  @media(min-width: 600px) {
+    .activity-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .activity-card {
+    cursor: pointer;
+    border: 2px solid #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    background: #fff;
+    position: relative;
+  }
+
+  .activity-card:hover { transform: translateY(-8px); border-color: var(--blush); box-shadow: 0 16px 40px #c9536a18; }
+
+  .activity-card.selected {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 4px #c9536a22, 0 16px 40px #c9536a18;
+  }
+
+  .activity-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .activity-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .activity-placeholder .icon { font-size: 3rem; }
+
+  .activity-body { padding: 20px; }
+
+  .activity-badge {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--rose);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .activity-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+
+  .activity-desc {
+    font-size: 0.85rem;
+    color: var(--soft);
+    line-height: 1.6;
+  }
+
+  .activity-perks {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .activity-perk {
+    font-size: 0.8rem;
+    color: var(--deep);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .activity-perk::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 9px;
+  }
+
+  .activity-check {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--rose);
+    color: #fff;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 12px #c9536a55;
+  }
+
+  .activity-card.selected .activity-check { display: flex; }
+
+  /* ── DATE PICKER SECTION ── */
+  #schedule {
+    background: #fff;
+    display: none;
+  }
+
+  #schedule.visible { display: block; }
+
+  .schedule-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .chosen-activity-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--soft);
+    margin-bottom: 30px;
+  }
+
+  .chosen-activity-label strong {
+    color: var(--rose);
+    font-style: normal;
+  }
+
+  .date-input-wrap {
+    position: relative;
+    margin: 0 auto 20px;
+    max-width: 260px;
+  }
+
+  .date-input-wrap label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-bottom: 8px;
+  }
+
+  .date-input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1.5px solid var(--blush);
+    border-radius: 50px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: var(--deep);
+    background: var(--cream);
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .date-input:focus { border-color: var(--rose); }
+
+  .confirm-btn {
+    margin-top: 24px;
+    background: linear-gradient(135deg, var(--rose), #8b2a40);
+    color: #fff;
+    border: none;
+    padding: 16px 48px;
+    border-radius: 50px;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 3px;
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px #c9536a44;
+  }
+
+  .confirm-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px #c9536a55; }
+
+  /* ── RESULT CARD ── */
+  #result-section {
+    background: linear-gradient(160deg, #2b1a1f, #5c2d3a);
+    padding: 100px 20px;
+    display: none;
+    text-align: center;
+  }
+
+  #result-section.visible { display: block; }
+
+  .result-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid #c9536a44;
+    border-radius: 28px;
+    padding: 50px 40px;
+    backdrop-filter: blur(10px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .result-card .emoji { font-size: 3rem; margin-bottom: 16px; }
+
+  .result-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .result-date-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--blush);
+    margin-bottom: 8px;
+  }
+
+  .result-activity-display {
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .result-note {
+    font-size: 0.85rem;
+    color: #f4c6ce88;
+    line-height: 1.7;
+  }
+
+  .restart-btn {
+    margin-top: 32px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 12px 36px;
+    border-radius: 50px;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 3px;
+    font-size: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .restart-btn:hover { background: var(--gold); color: var(--deep); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #f4c6ce55;
+    font-size: 0.9rem;
+  }
+
+  /* ── INSTRUCTIONS PANEL ── */
+  .instructions {
+    background: #fff9f0;
+    border: 1.5px dashed var(--gold);
+    border-radius: 16px;
+    padding: 24px 28px;
+    max-width: 720px;
+    margin: 0 auto 60px;
+  }
+
+  .instructions h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--deep);
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .instructions ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .instructions li {
+    font-size: 0.8rem;
+    color: var(--soft);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .instructions li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  code {
+    background: #f4e8d8;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    color: var(--rose);
+  }
+</style>
 </head>
 <body>
-    <div class="hearts" id="hearts"></div>
-    
-    <div class="container">
-        <div class="message" id="message">Sayangggg</div>
-        <div class="emoji" id="emoji">😢</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="petals" id="petals"></div>
+  <div class="hero-tag">✦ A special wish for you ✦</div>
+  <h1 class="hero-title">
+    Happy Birthday
+    <span>My Destiny</span>
+  </h1>
+  <p class="hero-sub">
+    Semoga hari ini menjadi hari yang paling indah dalam hidupmu, dan setiap mimpimu menjadi nyata.
+  </p>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════ FLOWER CHOICE ══════════ -->
+<section id="flowers">
+  <div class="section">
+    <p class="section-label">✦ For you ✦</p>
+    <h2 class="section-title">Please Choose Your<br><em>Favorite Flower</em></h2>
+
+    <!-- INSTRUCTION PANEL — bisa dihapus setelah gambar sudah dipasang -->
+    <div class="instructions">
+      <h3>🌸 Cara Ganti Gambar Bunga</h3>
+      <ul>
+        <li>Upload 4 foto bungamu ke folder yang sama dengan file ini.</li>
+        <li>Ganti <code>src="YOUR_FLOWER_1.jpg"</code> di bawah dengan nama file fotomu.</li>
+        <li>Contoh: <code>src="mawar.jpg"</code>, <code>src="tulip.jpg"</code>, dst.</li>
+      </ul>
     </div>
 
-    <script>
-        const messages = [
-            { text: "Sayangggg", emoji: "😢", duration: 5000 },
-            { text: "Jangan sedih sedih yaa", emoji: "😔", duration: 5000 },
-            { text: "Aku punya sesuatu untukmu", emoji: "🤔", duration: 5000 },
-            { text: "Ini untukmu", emoji: "💐", duration: 15000 }
-        ];
+    <div class="flower-grid">
+      <!-- FLOWER CARD 1 — ganti src dengan foto bunga kamu -->
+      <div class="flower-card" onclick="selectFlower(this, 'Mawar')">
+        <div class="flower-check">✓</div>
+        <!-- <img class="flower-img" src="YOUR_FLOWER_1.jpg" alt="Mawar"/> -->
+        <div class="flower-placeholder">
+          <div class="icon">🌹</div>
+          <div class="ph-label">Ganti dengan foto</div>
+        </div>
+        <div class="flower-name">Mawar</div>
+      </div>
 
-        let currentIndex = 0;
+      <!-- FLOWER CARD 2 -->
+      <div class="flower-card" onclick="selectFlower(this, 'Tulip')">
+        <div class="flower-check">✓</div>
+        <!-- <img class="flower-img" src="YOUR_FLOWER_2.jpg" alt="Tulip"/> -->
+        <div class="flower-placeholder">
+          <div class="icon">🌷</div>
+          <div class="ph-label">Ganti dengan foto</div>
+        </div>
+        <div class="flower-name">Tulip</div>
+      </div>
 
-        function createFlower() {
-            const flower = document.createElement('div');
-            flower.className = 'heart';
-            const flowers = ['🌸', '🌺', '🌹', '🌷', '🌻', '💐'];
-            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-            flower.style.left = Math.random() * 100 + '%';
-            flower.style.fontSize = (Math.random() * 30 + 30) + 'px';
-            flower.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.getElementById('hearts').appendChild(flower);
-            
-            setTimeout(() => {
-                flower.remove();
-            }, 7000);
-        }
+      <!-- FLOWER CARD 3 -->
+      <div class="flower-card" onclick="selectFlower(this, 'Bunga Matahari')">
+        <div class="flower-check">✓</div>
+        <!-- <img class="flower-img" src="YOUR_FLOWER_3.jpg" alt="Bunga Matahari"/> -->
+        <div class="flower-placeholder">
+          <div class="icon">🌻</div>
+          <div class="ph-label">Ganti dengan foto</div>
+        </div>
+        <div class="flower-name">Bunga Matahari</div>
+      </div>
 
-        function updateMessage() {
-            const messageEl = document.getElementById('message');
-            const emojiEl = document.getElementById('emoji');
-            
-            messageEl.style.animation = 'none';
-            emojiEl.style.animation = 'none';
-            
-            setTimeout(() => {
-                messageEl.textContent = messages[currentIndex].text;
-                emojiEl.textContent = messages[currentIndex].emoji;
-                
-                messageEl.style.animation = 'fadeIn 1s ease-in';
-                emojiEl.style.animation = 'bounce 1s ease-in';
-                
-                // Jika pesan bunga, buat banyak bunga berguguran
-                if (currentIndex === 3) {
-                    const flowerInterval = setInterval(createFlower, 100);
-                    setTimeout(() => clearInterval(flowerInterval), 15000);
-                }
-                
-                const duration = messages[currentIndex].duration;
-                currentIndex = (currentIndex + 1) % messages.length;
-                
-                setTimeout(updateMessage, duration);
-            }, 100);
-        }
+      <!-- FLOWER CARD 4 -->
+      <div class="flower-card" onclick="selectFlower(this, 'Lavender')">
+        <div class="flower-check">✓</div>
+        <!-- <img class="flower-img" src="YOUR_FLOWER_4.jpg" alt="Lavender"/> -->
+        <div class="flower-placeholder">
+          <div class="icon">💜</div>
+          <div class="ph-label">Ganti dengan foto</div>
+        </div>
+        <div class="flower-name">Lavender</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Mulai pesan pertama
-        updateMessage();
+<!-- ══════════ TRANSITION BANNER ══════════ -->
+<div id="transition-banner">
+  <h2>Now, let's plan<br><em>our special day together ✨</em></h2>
+  <p>Pilih kegiatan favoritmu — dan kita akan buat hari itu tak terlupakan.</p>
+</div>
 
-        // Buat hati berterbangan
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.textContent = '❤️';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
-            heart.style.animationDelay = Math.random() * 5 + 's';
-            document.getElementById('hearts').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 13000);
-        }
+<!-- ══════════ ACTIVITIES ══════════ -->
+<section id="activities">
+  <div class="section">
+    <p class="section-label">✦ Our date ✦</p>
+    <h2 class="section-title">Where Would You Like<br><em>to Spend Our Day?</em></h2>
 
-        // Buat hati baru setiap 2 detik
-        setInterval(createHeart, 2000);
-        
-        // Buat beberapa hati di awal
-        for(let i = 0; i < 5; i++) {
-            setTimeout(createHeart, i * 400);
-        }
-    </script>
+    <div class="instructions">
+      <h3>🍕 Cara Ganti Gambar Aktivitas</h3>
+      <ul>
+        <li>Upload foto untuk setiap aktivitas ke folder yang sama.</li>
+        <li>Ganti <code>src="YOUR_PIZZA.jpg"</code>, <code>YOUR_SCOOTER.jpg"</code>, <code>"YOUR_BEACH.jpg"</code>.</li>
+        <li>Uncomment tag <code>&lt;img&gt;</code> dan hapus div placeholder di bawahnya.</li>
+      </ul>
+    </div>
+
+    <div class="activity-grid">
+
+      <!-- ACTIVITY 1: Making Pizza -->
+      <div class="activity-card" onclick="selectActivity(this, 'Making Pizza 🍕')">
+        <div class="activity-check">✓</div>
+        <!-- <img class="activity-img" src="YOUR_PIZZA.jpg" alt="Making Pizza"/> -->
+        <div class="activity-placeholder" style="background:linear-gradient(135deg,#fff0e0,#ffe0b0)">
+          <div class="icon">🍕</div>
+          <div class="ph-label" style="font-size:9px;letter-spacing:2px;color:#a07040;text-transform:uppercase">Ganti dengan foto</div>
+        </div>
+        <div class="activity-body">
+          <div class="activity-badge">🍽 Cooking Date</div>
+          <div class="activity-name">Making Pizza Together</div>
+          <div class="activity-desc">
+            Kita bikin pizza dari awal — dari adonan, saus, sampai topping pilihan kita sendiri. Seru, messy, dan pasti enak!
+          </div>
+          <div class="activity-perks">
+            <div class="activity-perk">Ngobrol bebas sambil masak bareng</div>
+            <div class="activity-perk">Bisa disesuaikan selera masing-masing</div>
+            <div class="activity-perk">Ada kejutan topping spesial! 🎉</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITY 2: Scooter -->
+      <div class="activity-card" onclick="selectActivity(this, 'Scooter Ride 🛵')">
+        <div class="activity-check">✓</div>
+        <!-- <img class="activity-img" src="YOUR_SCOOTER.jpg" alt="Scooter Ride"/> -->
+        <div class="activity-placeholder" style="background:linear-gradient(135deg,#e0f0ff,#b0d8ff)">
+          <div class="icon">🛵</div>
+          <div class="ph-label" style="font-size:9px;letter-spacing:2px;color:#4070a0;text-transform:uppercase">Ganti dengan foto</div>
+        </div>
+        <div class="activity-body">
+          <div class="activity-badge">🌬 Adventure</div>
+          <div class="activity-name">Scooter Ride</div>
+          <div class="activity-desc">
+            Kita keliling kota naik skutik, nikmatin angin, singgah di tempat-tempat cantik, dan bikin kenangan di setiap tikungan.
+          </div>
+          <div class="activity-perks">
+            <div class="activity-perk">Bebas tentukan arah tujuan</div>
+            <div class="activity-perk">Foto-foto di spot estetik</div>
+            <div class="activity-perk">Mampir makan es krim pinggir jalan 🍦</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITY 3: Pantai -->
+      <div class="activity-card" onclick="selectActivity(this, 'Pantai 🏖')">
+        <div class="activity-check">✓</div>
+        <!-- <img class="activity-img" src="YOUR_BEACH.jpg" alt="Pantai"/> -->
+        <div class="activity-placeholder" style="background:linear-gradient(135deg,#e0fff8,#80e8d0)">
+          <div class="icon">🏖</div>
+          <div class="ph-label" style="font-size:9px;letter-spacing:2px;color:#207060;text-transform:uppercase">Ganti dengan foto</div>
+        </div>
+        <div class="activity-body">
+          <div class="activity-badge">🌊 Relax</div>
+          <div class="activity-name">Beach Day</div>
+          <div class="activity-desc">
+            Duduk di tepi pantai, kaki kita di pasir, dengerin ombak, dan nikmatin sunset bareng. Tenang, damai, dan romantis.
+          </div>
+          <div class="activity-perks">
+            <div class="activity-perk">Sunset view yang nggak terlupakan</div>
+            <div class="activity-perk">Jalan-jalan di tepi ombak</div>
+            <div class="activity-perk">Piknik & cerita panjang sampai malam 🌙</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DATE SCHEDULE ══════════ -->
+<section id="schedule">
+  <div class="section">
+    <p class="section-label">✦ Set the date ✦</p>
+    <h2 class="section-title">When Are You<br><em>Free?</em></h2>
+    <div class="schedule-inner">
+      <p class="chosen-activity-label">Kamu memilih: <strong id="chosen-activity-text">—</strong></p>
+      <div class="date-input-wrap">
+        <label for="chosen-date">Pilih Tanggalmu</label>
+        <input class="date-input" type="date" id="chosen-date"/>
+      </div>
+      <br/>
+      <button class="confirm-btn" onclick="confirmDate()">Konfirmasi Tanggal ✦</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RESULT ══════════ -->
+<section id="result-section">
+  <div class="result-card">
+    <div class="emoji">🎉</div>
+    <h2>It's a Date!</h2>
+    <div class="result-date-display" id="result-date-text">—</div>
+    <div class="result-activity-display" id="result-activity-text">—</div>
+    <p class="result-note">
+      Tanggal sudah ditandai di kalender hati kita. ✨<br/>
+      Tidak sabar untuk menghabiskan hari itu bersamamu, my destiny.
+    </p>
+    <br/>
+    <button class="restart-btn" onclick="restart()">Mulai Ulang ↩</button>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <p>"Every day with you is a celebration." 🌸</p>
+</footer>
+
+<script>
+  /* ── Falling Petals ── */
+  const petalsEl = document.getElementById('petals');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (6 + Math.random() * 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = (8 + Math.random() * 10) + 'px';
+    p.style.height = (12 + Math.random() * 14) + 'px';
+    petalsEl.appendChild(p);
+  }
+
+  /* ── State ── */
+  let chosenFlower = null;
+  let chosenActivity = null;
+
+  /* ── Flower Selection ── */
+  function selectFlower(card, name) {
+    document.querySelectorAll('.flower-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    chosenFlower = name;
+    // Smooth scroll ke aktivitas setelah 0.5 detik
+    setTimeout(() => {
+      document.getElementById('transition-banner').scrollIntoView({ behavior: 'smooth' });
+    }, 400);
+  }
+
+  /* ── Activity Selection ── */
+  function selectActivity(card, name) {
+    document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    chosenActivity = name;
+
+    document.getElementById('chosen-activity-text').textContent = name;
+
+    const scheduleEl = document.getElementById('schedule');
+    scheduleEl.classList.add('visible');
+    setTimeout(() => {
+      scheduleEl.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  }
+
+  /* ══════════════════════════════════════
+     🔧 TELEGRAM CONFIG — ISI DI SINI
+     ══════════════════════════════════════
+     Cara dapat BOT_TOKEN:
+       1. Buka Telegram, cari @BotFather
+       2. Ketik /newbot, ikuti instruksi
+       3. Copy token yang diberikan
+
+     Cara dapat CHAT_ID:
+       1. Kirim pesan apa saja ke bot kamu
+       2. Buka: https://api.telegram.org/bot<TOKEN>/getUpdates
+       3. Lihat bagian "chat":{"id": XXXXXXX}
+          Angka itu adalah CHAT_ID kamu
+  ════════════════════════════════════════ */
+  const TELEGRAM_BOT_TOKEN = '8921280965:AAGA3D_JaWHOTnXWQr7osIHDxYCIdOHrutQ';
+  const TELEGRAM_CHAT_ID   = '7726063097';
+
+  /* ── Date Confirm ── */
+  async function confirmDate() {
+    const dateInput = document.getElementById('chosen-date').value;
+    if (!dateInput) {
+      alert('Pilih tanggalmu dulu ya 📅');
+      return;
+    }
+    if (!chosenActivity) {
+      alert('Pilih dulu aktivitasnya 🌸');
+      return;
+    }
+
+    // Format tanggal ke Bahasa Indonesia
+    const d = new Date(dateInput + 'T00:00:00');
+    const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+    const formatted = d.toLocaleDateString('id-ID', opts);
+
+    // Tampilkan result di halaman
+    document.getElementById('result-date-text').textContent = formatted;
+    document.getElementById('result-activity-text').textContent = chosenActivity;
+    const resultEl = document.getElementById('result-section');
+    resultEl.classList.add('visible');
+    setTimeout(() => resultEl.scrollIntoView({ behavior: 'smooth' }), 300);
+
+    // Kirim notifikasi ke Telegram
+    await kirimKeTelegram(formatted);
+  }
+
+  async function kirimKeTelegram(tanggal) {
+    const pesan =
+`🌸 *Hei! Ada yang baru mengisi form ulang tahun!*
+
+🌺 *Bunga favorit:* ${chosenFlower || '(belum dipilih)'}
+🎯 *Aktivitas pilihan:* ${chosenActivity}
+📅 *Tanggal free:* ${tanggal}
+
+_Dikirim otomatis dari halaman Birthday Web_ 💌`;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: pesan,
+          parse_mode: 'Markdown'
+        })
+      });
+      const data = await res.json();
+      if (!data.ok) {
+        console.warn('Telegram error:', data.description);
+        // Tetap lanjut tampilkan result meski Telegram gagal
+      }
+    } catch (err) {
+      console.warn('Gagal kirim ke Telegram:', err);
+      // Tidak perlu alert ke user — pengalaman tetap mulus
+    }
+  }
+
+  /* ── Restart ── */
+  function restart() {
+    document.querySelectorAll('.flower-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.activity-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('schedule').classList.remove('visible');
+    document.getElementById('result-section').classList.remove('visible');
+    document.getElementById('chosen-date').value = '';
+    chosenFlower = null;
+    chosenActivity = null;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── Set min date to today ── */
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('chosen-date').setAttribute('min', today);
+</script>
 </body>
 </html>
